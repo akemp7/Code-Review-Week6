@@ -14,14 +14,18 @@ $(document).ready(function(event){
 
     promiseIssue.then(function(response){
       let body = JSON.parse(response);
-      console.log(body);
+      $('.results').text(`${body}`);
     }, function(error) {
       $('.error').append(`There was an error processing your request: ${error.message}`)
     });
 
+  //   // if (body === '[]'){
+  //     return $('.results').text("No results found");
+  // }
+
     promiseName.then(function(response){
       let body = JSON.parse(response);
-      console.log(body);
+      $('.results').text(`${body}`);
     }, function(error) {
       $('.error').append(`There was an error processing your request:${error.message}`)
     });
