@@ -14,10 +14,14 @@ $(document).ready(function(event){
 
     promiseIssue.then(function(response){
       let body = JSON.parse(response);
-        $('.results').text(`${body.data.practices.name}`);
+      console.log(`${body.data[0].practices.name}`);
+      console.log(`${body.data[0].practices.accepts_new_patients}`);
+      console.log(`${body.data[0].practices.visit_address}`)
+      console.log(`${body.data[0].practices.phones.number}`)
     }, function(error) {
       $('.error').append(`There was an error processing your request: ${error.message}`)
     });
+
 
   //   // if (body === '[]'){
   //     return $('.results').text("No results found");
@@ -25,7 +29,10 @@ $(document).ready(function(event){
 
     promiseName.then(function(response){
       let body = JSON.parse(response);
-      $('.results').text(`${body.data.practices.name}`);
+      console.log(`${body.data[0].practices.name}`);
+      console.log(`${body.data[0].practices.accepts_new_patients}`);
+      console.log(`${body.data[0].practices.visit_address}`)
+      console.log(`${body.data[0].practices.phones.number}`)
     }, function(error) {
       $('.error').append(`There was an error processing your request:${error.message}`)
     });
