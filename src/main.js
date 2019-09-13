@@ -14,25 +14,29 @@ $(document).ready(function(event){
 
     promiseIssue.then(function(response){
       let body = JSON.parse(response);
-      console.log(`${body.data[0].practices.name}`);
-      console.log(`${body.data[0].practices.accepts_new_patients}`);
-      console.log(`${body.data[0].practices.visit_address}`)
-      console.log(`${body.data[0].practices.phones.number}`)
+      $('.results').append(`${body["data"][0]["practices"][0]["name"]}`);
+      $('.results').append(`${body["data"][0]["practices"][0]["accepts_new_patients"]}`);
+      $('.results').append(`${body["data"][0]["practices"][0]["visit_address"]["street"]}`);
+      $('.results').append(`${body["data"][0]["practices"][0]["visit_address"]["street2"]}`);
+      $('.results').append(`${body["data"][0]["practices"][0]["visit_address"]["zip"]}`);
+      $('.results').append(`${body["data"][0]["practices"][0]["phones"][0]["number"]}`);
     }, function(error) {
       $('.error').append(`There was an error processing your request: ${error.message}`)
     });
 
 
-  //   // if (body === '[]'){
-  //     return $('.results').text("No results found");
-  // }
+    if (`${body["data"][0]}` === '[]'){
+      return $('.results').text("No results found");
+  }
 
     promiseName.then(function(response){
       let body = JSON.parse(response);
-      console.log(`${body.data[0].practices.name}`);
-      console.log(`${body.data[0].practices.accepts_new_patients}`);
-      console.log(`${body.data[0].practices.visit_address}`)
-      console.log(`${body.data[0].practices.phones.number}`)
+      $('.results').append(`${body["data"][0]["practices"][0]["name"]}`);
+      $('.results').append(`${body["data"][0]["practices"][0]["accepts_new_patients"]}`);
+      $('.results').append(`${body["data"][0]["practices"][0]["visit_address"]["street"]}`);
+      $('.results').append(`${body["data"][0]["practices"][0]["visit_address"]["street2"]}`);
+      $('.results').append(`${body["data"][0]["practices"][0]["visit_address"]["zip"]}`);
+      $('.results').append(`${body["data"][0]["practices"][0]["phones"][0]["number"]}`);
     }, function(error) {
       $('.error').append(`There was an error processing your request:${error.message}`)
     });
