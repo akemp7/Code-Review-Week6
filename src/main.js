@@ -22,7 +22,7 @@ $(document).ready(function(event){
       $('.results').append(`${body["data"][0]["practices"][0]["phones"][0]["number"]}`);
     }, function(error) {
       $('.error').append(`There was an error processing your request: ${error.message}`)
-    });
+    }); 
 
 
     if (`${body["data"][0]}` === '[]'){
