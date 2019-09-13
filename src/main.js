@@ -14,7 +14,7 @@ $(document).ready(function(event){
 
     promiseIssue.then(function(response){
       let body = JSON.parse(response);
-      $('.results').text(`${body}`);
+        $('.results').text(`${body.data.practices.name}`);
     }, function(error) {
       $('.error').append(`There was an error processing your request: ${error.message}`)
     });
@@ -25,7 +25,7 @@ $(document).ready(function(event){
 
     promiseName.then(function(response){
       let body = JSON.parse(response);
-      $('.results').text(`${body}`);
+      $('.results').text(`${body.data.practices.name}`);
     }, function(error) {
       $('.error').append(`There was an error processing your request:${error.message}`)
     });
