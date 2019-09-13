@@ -7,13 +7,19 @@ $(document).ready(function(event){
   $('#medIssue').submit(function(event){
     event.preventDefault();
     let medicalIssue = $('input[name=medicalIssue]').val();
+    let doctorName = $('input[name=doctor]').val();
     let treatment = new treatmentSearch();
-    let promise = treatment.getTreatment(medicalIssue);
+    let promiseIssue = treatment.getTreatment(medicalIssue);
+    let promiseName = treatment.getDoctorName(doctorName);
 
-
-    promise.then(function(response){
+    promiseIssue.then(function(response){
       let body = JSON.parse(response);
-      console.log(`${body.data.practices.name}`);
+      console.log(body);
+    });
+
+    promiseName.then(function(response){
+      let body = JSON.parse(response);
+      console.log(body);
     });
   });
 });
