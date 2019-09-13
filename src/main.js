@@ -15,11 +15,15 @@ $(document).ready(function(event){
     promiseIssue.then(function(response){
       let body = JSON.parse(response);
       console.log(body);
+    }, function(error) {
+      $('.error').append(`There was an error processing your request: ${error.message}`)
     });
 
     promiseName.then(function(response){
       let body = JSON.parse(response);
       console.log(body);
+    }, function(error) {
+      $('.error').append(`There was an error processing your request:${error.message}`)
     });
   });
 });
