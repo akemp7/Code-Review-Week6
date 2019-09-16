@@ -14,34 +14,35 @@ $(document).ready(function(event){
 
     promiseIssue.then(function(response){
     let body = JSON.parse(response);
-      if (`${body["data"][0]}` === ""){
+      if (`${body["data"][0]}` === []){
         return $('.results').text("No doctors meet your criteria");
       } else {
-        $('.results').append(`${body["data"][0]["practices"][0]["name"]}`);
-        $('.results').append(`${body["data"][0]["practices"][0]["accepts_new_patients"]}`);
-        $('.results').append(`${body["data"][0]["practices"][0]["visit_address"]["street"]}`);
-        $('.results').append(`${body["data"][0]["practices"][0]["visit_address"]["street2"]}`);
-        $('.results').append(`${body["data"][0]["practices"][0]["visit_address"]["zip"]}`);
-        $('.results').append(`${body["data"][0]["practices"][0]["phones"][0]["number"]}`);
+        let practice = `${body["data"][0]["practices"][0]["name"]}`;
+        let patient = `${body["data"][0]["practices"][0]["accepts_new_patients"]}`;
+        let addressStreet = `${body["data"][0]["practices"][0]["visit_address"]["street"]}`;
+        let addressStreet2 = `${body["data"][0]["practices"][0]["visit_address"]["street2"]}`;
+        let zipCode = `${body["data"][0]["practices"][0]["visit_address"]["zip"]}`;
+        let number = `${body["data"][0]["practices"][0]["phones"][0]["number"]}`;
+        let output = practice + patient + addressStreet + addressStreet2 + zipCode + number;
+        $('.results').append(output);
       }
     }, function(error) {
       $('.error').append(`There was an error processing your request: ${error.message}`)
   });
-
-
-
 
     promiseName.then(function(response){
     let body = JSON.parse(response);
       if (`${body["data"][0]}` === ""){
         return $('.results').text("No doctors meet your criteria");
       } else {
-        $('.results').append(`${body["data"][0]["practices"][0]["name"]}`);
-        $('.results').append(`${body["data"][0]["practices"][0]["accepts_new_patients"]}`);
-        $('.results').append(`${body["data"][0]["practices"][0]["visit_address"]["street"]}`);
-        $('.results').append(`${body["data"][0]["practices"][0]["visit_address"]["street2"]}`);
-        $('.results').append(`${body["data"][0]["practices"][0]["visit_address"]["zip"]}`);
-        $('.results').append(`${body["data"][0]["practices"][0]["phones"][0]["number"]}`);
+        let practice = `${body["data"][0]["practices"][0]["name"]}`;
+        let patient = `${body["data"][0]["practices"][0]["accepts_new_patients"]}`;
+        let addressStreet = `${body["data"][0]["practices"][0]["visit_address"]["street"]}`;
+        let addressStreet2 = `${body["data"][0]["practices"][0]["visit_address"]["street2"]}`;
+        let zipCode = `${body["data"][0]["practices"][0]["visit_address"]["zip"]}`;
+        let number = `${body["data"][0]["practices"][0]["phones"][0]["number"]}`;
+        let output = practice + patient + addressStreet + addressStreet2 + zipCode + number;
+        $('.results').append(output);
       }
     }, function(error) {
       $('.error').append(`There was an error processing your request: ${error.message}`)
