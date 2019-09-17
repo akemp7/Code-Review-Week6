@@ -9,43 +9,24 @@ $(document).ready(function(event){
     let medicalIssue = $('input[name=medicalIssue]').val();
     let doctorName = $('input[name=doctor]').val();
     let treatment = new treatmentSearch();
-    let promiseIssue = treatment.getTreatment(medicalIssue);
-    let promiseName = treatment.getDoctorName(doctorName);
+    let promiseIssue = treatment.getTreatment(medicalIssue, doctorName);
 
     promiseIssue.then(function(response){
-    let body = JSON.parse(response);
-      if (`${body["data"][0]}` === []){
-        return $('.results').text("No doctors meet your criteria");
+      let body = JSON.parse(response);
+      if(`${body.meta.count}` === 0){
+        $('.results').append('There were no doctors for your search result')
       } else {
-        let practice = `${body["data"][0]["practices"][0]["name"]}`;
-        let patient = `${body["data"][0]["practices"][0]["accepts_new_patients"]}`;
-        let addressStreet = `${body["data"][0]["practices"][0]["visit_address"]["street"]}`;
-        let addressStreet2 = `${body["data"][0]["practices"][0]["visit_address"]["street2"]}`;
-        let zipCode = `${body["data"][0]["practices"][0]["visit_address"]["zip"]}`;
-        let number = `${body["data"][0]["practices"][0]["phones"][0]["number"]}`;
-        let output = practice + patient + addressStreet + addressStreet2 + zipCode + number;
-        $('.results').append(output);
+        body.data.forEach(function(doctor){
+          console.log(body);
+          $('.results').append(`<li> Name: ${doctor.profile.first_name} ${doctor.profile.last_name}</li>`);
+          doctor.practices.forEach(function(practice){
+            $('.results').append(`<li> Practice: ${practice.name}</li>`);
+            $('.results').append(`<li> Address: ${practice.visit_address.street} ${practice.visit_address.zip}</li>`);
+            $('.results').append(`<li> Accepts New Patients: ${practice.accepts_new_patients}</li>`);
+              $('.results').append(`<li> Phone Number: ${practice.phones[0].number}</li>`);
+          });
+        });
       }
-    }, function(error) {
-      $('.error').append(`There was an error processing your request: ${error.message}`)
-  });
-
-    promiseName.then(function(response){
-    let body = JSON.parse(response);
-      if (`${body["data"][0]}` === ""){
-        return $('.results').text("No doctors meet your criteria");
-      } else {
-        let practice = `${body["data"][0]["practices"][0]["name"]}`;
-        let patient = `${body["data"][0]["practices"][0]["accepts_new_patients"]}`;
-        let addressStreet = `${body["data"][0]["practices"][0]["visit_address"]["street"]}`;
-        let addressStreet2 = `${body["data"][0]["practices"][0]["visit_address"]["street2"]}`;
-        let zipCode = `${body["data"][0]["practices"][0]["visit_address"]["zip"]}`;
-        let number = `${body["data"][0]["practices"][0]["phones"][0]["number"]}`;
-        let output = practice + patient + addressStreet + addressStreet2 + zipCode + number;
-        $('.results').append(output);
-      }
-    }, function(error) {
-      $('.error').append(`There was an error processing your request: ${error.message}`)
+      });
     });
   });
-});
