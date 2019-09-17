@@ -24,9 +24,12 @@ $(document).ready(function(event){
             $('.results').append(`<li> Address: ${practice.visit_address.street} ${practice.visit_address.zip}</li>`);
             $('.results').append(`<li> Accepts New Patients: ${practice.accepts_new_patients}</li>`);
               $('.results').append(`<li> Phone Number: ${practice.phones[0].number}</li>`);
+              $('.results').append(`<li> Website: ${practice.website}</li>`);
           });
         });
       }
-      });
+    }, function(error){
+      $('.error').append(`There was an error processing your request: ${error.message}`)
+    });
     });
   });
