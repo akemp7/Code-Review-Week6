@@ -13,14 +13,14 @@ $(document).ready(function(event){
 
     promiseIssue.then(function(response){
       let body = JSON.parse(response);
-      if(`${body.meta.count}` === 0){
-        $('.results').append('There were no doctors for your search result')
+      if(`${body.meta.count}` <= 0){
+        $('.results').append('There were no doctors who matched your search criteria.')
       } else {
         body.data.forEach(function(doctor){
           console.log(body);
-          $('.results').append(`<li> Name: ${doctor.profile.first_name} ${doctor.profile.last_name}</li>`);
+          $('.results').append(`<li> <span class='name'> Name:  ${doctor.profile.first_name} ${doctor.profile.last_name}</span></li>`);
           doctor.practices.forEach(function(practice){
-            $('.results').append(`<li> Practice: ${practice.name}</li>`);
+            $('.results').append(`<li> <span class='name'> Practice: ${practice.name}</span></li>`);
             $('.results').append(`<li> Address: ${practice.visit_address.street} ${practice.visit_address.zip}</li>`);
             $('.results').append(`<li> Accepts New Patients: ${practice.accepts_new_patients}</li>`);
               $('.results').append(`<li> Phone Number: ${practice.phones[0].number}</li>`);
